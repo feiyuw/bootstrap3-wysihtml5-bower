@@ -10,11 +10,7 @@
           <input value="" class="bootstrap-wysihtml5-insert-image-url form-control">
           <input type="file" id="fileupload" multiple="" name="files[]">
           <span id="uploaderror" class="text-danger"></span>
-          <div id="progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
-          </div>
-          <table id="attachList" class="table table-hover">
-          </table>
+          <dl class="dl-horizontal" id="attachList"></dl>
         </div>
         <div class="modal-footer">
           <a class="btn btn-default" data-dismiss="modal">{{locale.image.cancel}}</a>
@@ -38,21 +34,14 @@
                 var data = resp.result;
                 var table = $('#attachList');
                 $.each(data, function(index, file) {
-                    var fileRow = '<tr><td>' +
+                    var fileRow = '<dt>' +
                         file.name +
-                        '</td><td><i class="fa fa-trash-o" name="' +
+                        '</dt><dd><i class="fa fa-trash-o" name="' +
                         file.path +
-                        '"></i></td></tr>';
+                        '"></i></dd>';
                     table.append(fileRow);
                     $('.bootstrap-wysihtml5-insert-image-url').attr('value', file.url);
                 });
-            },
-            progressall: function(e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
             },
             processalways: function(e, data) {
                 var file = data.files[data.index];
@@ -63,8 +52,6 @@
             start: function(e) {
                 // reset upload error
                 $('#uploaderror').text('');
-                // reset progress bar
-                $('#progress .progress-bar').css('width', 0);
             }
     });
 
@@ -82,7 +69,10 @@
         })
         .done(function(data) {
             var deletedFile = data.deletedFile;
-            $('i[name="' + deletedFile + '"]').parent().parent().remove();
+            var dd = $('i[name="' + deletedFile + '"]').parent();
+            var dt = dd.prev('dt')
+            dd.remove();
+            dt.remove();
             $('.bootstrap-wysihtml5-insert-image-url').attr('value', '');
         });
 
