@@ -10,6 +10,9 @@
           <input value="" class="bootstrap-wysihtml5-insert-image-url form-control">
           <input type="file" id="fileupload" multiple="" name="files[]">
           <span id="uploaderror" class="text-danger"></span>
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+          </div>
           <dl class="dl-horizontal" id="attachList"></dl>
         </div>
         <div class="modal-footer">
@@ -43,6 +46,13 @@
                     $('.bootstrap-wysihtml5-insert-image-url').attr('value', file.url);
                 });
             },
+            progressall: function(e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            },
             processalways: function(e, data) {
                 var file = data.files[data.index];
                 if (file.error) {
@@ -52,6 +62,8 @@
             start: function(e) {
                 // reset upload error
                 $('#uploaderror').text('');
+                // reset progress bar
+                $('#progress .progress-bar').css('width', 0);
             }
     });
 
