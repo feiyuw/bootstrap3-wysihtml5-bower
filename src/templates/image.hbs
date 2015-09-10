@@ -28,43 +28,43 @@
 </li>
 <script>
     $('#fileupload').fileupload({
-            url: '/api/upload',
-            dataType: 'json',
-            autoUpload: true,
-            acceptFileTypes: /(\.|\/)(png|jpg|gif|tiff|svg)$/i,
-            maxFileSize: 2000000, // 2 MB
-            done: function(e, resp) {
-                var data = resp.result;
-                var table = $('#attachList');
-                $.each(data, function(index, file) {
-                    var fileRow = '<dt>' +
-                        file.name +
-                        '</dt><dd><i class="fa fa-trash-o" name="' +
-                        file.path +
-                        '"></i></dd>';
-                    table.append(fileRow);
-                    $('.bootstrap-wysihtml5-insert-image-url').attr('value', file.url);
-                });
-            },
-            progressall: function(e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-            },
-            processalways: function(e, data) {
-                var file = data.files[data.index];
-                if (file.error) {
-                    $('#uploaderror').text(file.error);
-                }
-            },
-            start: function(e) {
-                // reset upload error
-                $('#uploaderror').text('');
-                // reset progress bar
-                $('#progress .progress-bar').css('width', 0);
+        url: '/api/upload',
+        dataType: 'json',
+        autoUpload: true,
+        acceptFileTypes: /(\.|\/)(png|jpg|gif|tiff|svg)$/i,
+        maxFileSize: 2000000, // 2 MB
+        done: function(e, resp) {
+            var data = resp.result;
+            var table = $('#attachList');
+            $.each(data, function(index, file) {
+                var fileRow = '<dt>' +
+                    file.name +
+                    '</dt><dd><i class="fa fa-trash-o" name="' +
+                    file.path +
+                    '"></i></dd>';
+                table.append(fileRow);
+                $('.bootstrap-wysihtml5-insert-image-url').attr('value', file.url);
+            });
+        },
+        progressall: function(e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+        processalways: function(e, data) {
+            var file = data.files[data.index];
+            if (file.error) {
+                $('#uploaderror').text(file.error);
             }
+        },
+        start: function(e) {
+            // reset upload error
+            $('#uploaderror').text('');
+            // reset progress bar
+            $('#progress .progress-bar').css('width', 0);
+        }
     });
 
 
