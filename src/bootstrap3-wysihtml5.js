@@ -48,8 +48,8 @@
       if(editor.currentView !== undefined && editor.currentView.iframe !== undefined && editor.currentView.iframe.contentDocument !== undefined){
         this.addMoreShortcuts(editor, editor.currentView.iframe.contentDocument.body || editor.currentView.iframe.contentDocument, options.shortcuts);
       }
-      
-      
+
+
       if(options && options.events) {
         for(var eventName in options.events) {
           editor.on(eventName, options.events[eventName]);
@@ -295,7 +295,7 @@
       return methods.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.wysihtml5' );
-    }    
+    }
   };
 
   $.fn.wysihtml5.Constructor = Wysihtml5;
@@ -306,7 +306,7 @@
     'emphasis': true,
     'blockquote': true,
     'lists': true,
-    'html': false,
+    'html': true,
     'link': true,
     'image': true,
     'smallmodals': false,
@@ -378,7 +378,7 @@
     shortcuts: {
       '83': 'small'     // S
     }
-    
+
   };
 
   if (typeof $.fn.wysihtml5.defaultOptionsCache === 'undefined') {
