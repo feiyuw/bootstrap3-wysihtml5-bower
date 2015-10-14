@@ -306,7 +306,7 @@
     'emphasis': true,
     'blockquote': true,
     'lists': true,
-    'html': true,
+    'html': false,
     'link': true,
     'image': true,
     'smallmodals': false,
